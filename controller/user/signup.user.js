@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const { SECRET_KEY } = process.env;
 
 const signUp = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, nameSurname, phoneNumber } = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: 'Email and Password Required' });
     } else {
@@ -16,14 +16,25 @@ const signUp = async (req, res) => {
             console.log(salt);
             const hash = bcrypt.hashSync(password, salt);
             console.log(hash);
+            const token = jwt.sign({ email: email }, SECRET_KEY);
             const newUser = new UserModel({
                 email: email,
-                password: hash
+                password: hash,
+                nameSurname: nameSurname,
+                phoneNumber: phoneNumber,
+                token: token
             });
             console.log(newUser);
             await newUser.save();
-            const token = jwt.sign({ email: email }, SECRET_KEY);
-            res.status(200).json({ message: 'User Created', token: token });
+            // const token = jwt.sign({ email: email }, SECRET_KEY);
+            res.status(200).json({
+                message: 'Welkome '+nameSurname+'!',
+                token: token,
+                email: email,
+                userID: newUser._id,
+                nameSurname: nameSurname,
+                phoneNumber: phoneNumber
+            });
 
         }
     }
