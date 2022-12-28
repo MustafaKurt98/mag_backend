@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema({
     phoneNumber: {
         type: String
     },
+    address: {
+        type: String
+    },
     token: {
         type: String
     },

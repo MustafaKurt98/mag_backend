@@ -1,4 +1,4 @@
-const UserModel = require('../../models/user/user.model');
+const UserModel = require('../../../models/user/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = process.env;
@@ -18,12 +18,12 @@ const signIn = async (req, res) => {
                     const result = await bcrypt.compare(password, user.password);
                     if (result) {
                         const payload = { email, date: new Date() };
-                        const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
+                        const token = jwt.sign(payload, SECRET_KEY);
                         res.status(200).json({
                             message: 'Hoşgeldin ' + user.nameSurname + '!',
                             email: user.email,
-                            token: token,
                             userID: user._id,
+                            token: token,
                             nameSurname: user.nameSurname,
                             phoneNumber: user.phoneNumber
                         });

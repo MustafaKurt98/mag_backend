@@ -1,10 +1,10 @@
-const UserModel = require('../../models/user/user.model');
+const UserModel = require('../../../models/user/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { SECRET_KEY } = process.env;
 
 const signUp = async (req, res) => {
-    const { email, password, nameSurname, phoneNumber } = req.body;
+    const { email, password, nameSurname, phoneNumber, address } = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: 'Email and Password Required' });
     } else {
@@ -22,13 +22,14 @@ const signUp = async (req, res) => {
                 password: hash,
                 nameSurname: nameSurname,
                 phoneNumber: phoneNumber,
+                address: address,
                 token: token
             });
             console.log(newUser);
             await newUser.save();
             // const token = jwt.sign({ email: email }, SECRET_KEY);
             res.status(200).json({
-                message: 'Welkome '+nameSurname+'!',
+                message: 'Welkome ' + nameSurname + '!',
                 token: token,
                 email: email,
                 userID: newUser._id,
