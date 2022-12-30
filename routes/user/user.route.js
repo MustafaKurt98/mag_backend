@@ -8,6 +8,7 @@ const updateUser = require('../../controller/user/update/update.user');
 const updateEmail = require('../../controller/user/update/update.email');
 const updatePhoneNumber = require('../../controller/user/update/update.phone');
 const updateAddress = require('../../controller/user/update/update.address');
+const guestSignIn = require('../../controller/guest/guest_user');
 
 
 router.post('/signup', signUp.signUp);
@@ -17,6 +18,7 @@ router.post('/updateUserName', updateUser.updateUser);
 router.post('/updateEmail', updateEmail.updateEmail);
 router.post('/updatePhoneNumber', updatePhoneNumber.updatePhoneNumber);
 router.post('/updateAddress', updateAddress.updateAddress);
+router.post('/guestsignin', guestSignIn.guestLogin);
 
 
 module.exports = router;

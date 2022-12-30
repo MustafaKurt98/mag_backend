@@ -14,9 +14,9 @@ const updatePhoneNumber = async (req, res) => {
             }, { $set: { phoneNumber: phoneNumber } });
             console.log('result ' + result);
             if (result) {
-                return res.status(200).json({ msg: 'Email güncellendi' });
+                return res.status(200).json({ msg: 'Telefon numarası güncellendi' });
             } else {
-                return res.status(400).json({ msg: 'Email güncellenemedi' });
+                return res.status(400).json({ msg: 'Telefon numarası güncellenemedi' });
             }
         }
 

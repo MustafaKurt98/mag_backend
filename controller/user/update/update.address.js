@@ -14,9 +14,9 @@ const updateAddress = async (req, res) => {
             }, { $set: { address: address } });
             console.log('result ' + result);
             if (result) {
-                return res.status(200).json({ msg: 'İsim güncellendi' });
+                return res.status(200).json({ msg: 'Adres güncellendi' });
             } else {
-                return res.status(400).json({ msg: 'İsim güncellenemedi' });
+                return res.status(400).json({ msg: 'Adres güncellenemedi' });
             }
         }
 

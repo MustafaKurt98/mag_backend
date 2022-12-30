@@ -29,7 +29,7 @@ const signUp = async (req, res) => {
             await newUser.save();
             // const token = jwt.sign({ email: email }, SECRET_KEY);
             res.status(200).json({
-                message: 'Welkome ' + nameSurname + '!',
+                message: 'Welcome ' + nameSurname + '!',
                 token: token,
                 email: email,
                 userID: newUser._id,
