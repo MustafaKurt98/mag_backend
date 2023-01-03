@@ -5,6 +5,6 @@ const productRead = require('../../controller/product/product_read');
 
 router.post('/create', productCreate.productCreate);
 
-router.get('/read', productRead.productRead);
+router.post('/read', productRead.paginationProductAPI);
 
 module.exports = router;
