@@ -1,7 +1,7 @@
 const ProductModel = require('../../models/product/product-model');
 
 const paginationProductAPI = async (req, res) => {
-    const { page, limit } = req.body;
+    const { page, limit } = req.query;
     console.log(page, limit);
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
