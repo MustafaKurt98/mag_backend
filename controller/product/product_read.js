@@ -1,4 +1,5 @@
 const ProductModel = require('../../models/product/product-model');
+const MagProductModel = require('../../models/product/mag.products.model');
 
 const paginationProductAPI = async (req, res) => {
     const { page, limit } = req.query;
@@ -6,7 +7,7 @@ const paginationProductAPI = async (req, res) => {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
     const results = {};
-    const count = await ProductModel.countDocuments().exec();
+    const count = await MagProductModel.countDocuments().exec();
     if (endIndex < count) {
         results.next = {
             page: page + 1,
@@ -20,7 +21,7 @@ const paginationProductAPI = async (req, res) => {
         }
     }
     try {
-        results.results = await ProductModel.find().limit(limit * 1).skip(startIndex).exec();
+        results.results = await MagProductModel.find().limit(limit * 1).skip(startIndex).exec();
         res.status(200).json(results);
     } catch (e) {
         res.status(500).json({ message: e.message });

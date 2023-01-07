@@ -4,7 +4,7 @@ const productCreate = require('../../controller/product/product_create');
 const productRead = require('../../controller/product/product_read');
 const searchProduct = require('../../controller/product/product_search');
 
-router.post('/create', productCreate.productCreate);
+router.post('/create', productCreate.magProductCreate);
 
 router.post('/read', productRead.paginationProductAPI);
 

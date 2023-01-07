@@ -4,6 +4,7 @@ const searchProductAPI = async (req, res) => {
     const { search } = req.query;
     console.log(search);
     try {
+        console.log('içeri girdi');
         const result = await ProductModel.where('id').regex(search).exec();
         res.status(200).json(result);
     } catch (e) {
