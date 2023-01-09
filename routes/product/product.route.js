@@ -6,7 +6,7 @@ const searchProduct = require('../../controller/product/product_search');
 
 router.post('/create', productCreate.magProductCreate);
 
-router.post('/read', productRead.paginationProductAPI);
+router.post('/read', productRead.MagpaginationProductAPI);
 
 router.post('/search', searchProduct.searchProductAPI);
 
