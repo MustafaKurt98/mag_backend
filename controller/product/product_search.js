@@ -6,11 +6,24 @@ const searchProductAPI = async (req, res) => {
     console.log(search);
     try {
         console.log('içeri girdi');
-        const result = await MagProductModel.where('name').regex(search).exec();
+        const result = await MagProductModel.where('code').regex(search).exec();
         res.status(200).json(result);
     } catch (e) {
         res.status(500).json({ message: e.message });
     }
 }
 
-module.exports = { searchProductAPI };
+
+const searchProductAPI2 = async (req, res) => {
+    const { search } = req.query;
+    console.log(search);
+    try {
+        console.log('içeri girdi');
+        const result = await ProductModel.where('name').regex(search).exec();
+        res.status(200).json(result);
+    } catch (e) {
+        res.status(500).json({ message: e.message });
+    }
+}
+
+module.exports = { searchProductAPI, searchProductAPI2 };
