@@ -23,7 +23,7 @@ const productCreate = async (req, res) => {
 
 
 const magProductCreate = async (req, res) => {
-    fs.readFile('./json/10ocakbulunan.json', 'utf-8', async (err, data) => {
+    fs.readFile('./json/mag_guncel.json', 'utf-8', async (err, data) => {
         if (err) {
             res.status(500).json({ message: 'Error reading file' });
         } else {

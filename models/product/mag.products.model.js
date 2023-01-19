@@ -14,7 +14,8 @@ const magproductsSchema = new mongoose.Schema({
                     String
                 ]
         }
-    ]
+    ],
+    image: { type: [String] },
 });
 
 module.exports = mongoose.model('MagProducts', magproductsSchema);
