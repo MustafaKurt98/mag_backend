@@ -2,8 +2,6 @@ const UserModel = require('../../../models/user/user.model');
 
 const updateEmail = async (req, res) => {
     const { token, email } = req.body;
-    console.log('token' + token);
-    console.log('email' + email);
     if (!token) {
         return res.status(400).json({ msg: 'Token yok' });
     } else {

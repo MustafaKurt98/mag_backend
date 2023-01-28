@@ -16,10 +16,12 @@ app.use(express.json());
 const userRouter = require('./routes/user/user.route');
 const basicAuth = require('./encryption_server/basic_auth');
 const productRouter = require('./routes/product/product.route');
+const cartRouter= require('./routes/cart/cart.route');
 
 
 app.use('/user',basicAuth ,userRouter);
 app.use('/product', productRouter);
+app.use('/cart', cartRouter);
 
 app.listen(port, () => {
     log.green('Server running on port', port);
