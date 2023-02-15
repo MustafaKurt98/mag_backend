@@ -1,0 +1,17 @@
+# Mailboxes under domain magrubber.com
+# Format: mail address, display name
+abdel.hjouj@magrubber.com, 
+adem.gokcek@magrubber.com, 
+fatura@magrubber.com, 
+h.yuksek@magrubber.com, 
+hasan.yuksek@magrubber.com, Hasan N Yuksek
+hatice@magrubber.com, 
+hizir@magrubber.com, 
+hulya@magrubber.com, 
+ilyas@magrubber.com, 
+info@magrubber.com, Admin
+marketing@magrubber.com, 
+operation@magrubber.com, 
+osicrew@magrubber.com, Osicrew
+sales@magrubber.com, 
+volkan.yilmaz@magrubber.com, 

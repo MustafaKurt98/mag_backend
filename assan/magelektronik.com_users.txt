@@ -1,0 +1,18 @@
+# Mailboxes under domain magelektronik.com
+# Format: mail address, display name
+bilgi@magelektronik.com, 
+depo@magelektronik.com, 
+ekip@magelektronik.com, 
+fatura@magelektronik.com, 
+ferdi@magelektronik.com, 
+hulya@magelektronik.com, 
+info@magelektronik.com, Admin
+kalite@magelektronik.com, 
+kubra.erdogan@magelektronik.com, 
+levent.andac@magelektronik.com, 
+mustafa@magelektronik.com, 
+nagihan.gumus@magelektronik.com, 
+omer@magelektronik.com, 
+operasyon@magelektronik.com, 
+osicrew@magelektronik.com, 
+u.emrah@magelektronik.com, 

@@ -1,0 +1,10 @@
+# Mailboxes under domain gokcekismakinalari.com
+# Format: mail address, display name
+berkay.sahin@gokcekismakinalari.com, 
+hatice.gokcek@gokcekismakinalari.com, Hatice Gökçek
+hatice@gokcekismakinalari.com, Hatice
+info@gokcekismakinalari.com, Admin
+ismail.dundar@gokcekismakinalari.com, İsmail Dündar
+osicrew@gokcekismakinalari.com, Osicrew
+serkan.aygun@gokcekismakinalari.com, Serkan Aygün
+yusuf.arinik@gokcekismakinalari.com, Yusuf Arınık

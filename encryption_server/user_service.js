@@ -7,7 +7,6 @@ module.exports = { authenticate };
 async function authenticate({ username, password }) {
 console.log( AUTH_NAME, AUTH_PASSWORD);
     const user = users.find(u => u.username === username && u.password === password);
-    console.log('bb '+user);
 
     if (user) {
         const { password, ...userWithoutPassword } = user;
