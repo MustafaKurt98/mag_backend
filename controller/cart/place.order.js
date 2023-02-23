@@ -7,10 +7,13 @@ const placeOrder = async (req, res) => {
     }else if(!cartList){
         return res.status(400).json({ msg: 'Sepet yok' });
     } else {
-        let result = await CartModel.create({
+        const cart= new CartModel({
             email: email,
             products: cartList
         });
+        console.log(cart);
+        let result = await cart.save();
+
         if (result) {
             return res.status(200).json({ msg: 'Sipariş verildi', cartlist : result });
         } else {

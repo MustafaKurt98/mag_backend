@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const MagProductModel = require('../../models/product/mag.products.model');
+const CartProductModel = require('../cart/cart.product.model');
 
 const cartModelSchema = new mongoose.Schema({
-    userId: { type: String },
+    email: { type: String },
     products: [
-        MagProductModel.schema
-        
+        CartProductModel.schema
     ],
     date: { type: Date, default: Date.now }
 });
