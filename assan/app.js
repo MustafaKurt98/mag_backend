@@ -190,80 +190,80 @@
 
 
 //karşılaştırma
-// const fs = require('fs');
+const fs = require('fs');
 
-// const file1 = fs.readFileSync('data2.json');
-// const file2 = fs.readFileSync('gokcek-caterpillar1000.json');
+const file1 = fs.readFileSync('unique7-allNumber.json');
+const file2 = fs.readFileSync('unique6-cat-allNumber.json');
 
-// const data1 = JSON.parse(file1);
-// const data2 = JSON.parse(file2);
+const data1 = JSON.parse(file1);
+const data2 = JSON.parse(file2);
 
-// const unmatchedPartNumbers = [];
+const unmatchedPartNumbers = [];
 
-// data1.forEach((item1) => {
-//   const match = data2.find((item2) => item1.partnumber === item2.partnumber);
-//   if (!match) {
-//     unmatchedPartNumbers.push({partnumber: item1.partnumber});
-//   }
-// });
+data1.forEach((item1) => {
+  const match = data2.find((item2) => item1.partnumber === item2.partnumber);
+  if (!match) {
+    unmatchedPartNumbers.push({partnumber: item1.partnumber});
+  }
+});
 
-// data2.forEach((item2) => {
-//   const match = data1.find((item1) => item2.partnumber === item1.partnumber);
-//   if (!match) {
-//     unmatchedPartNumbers.push({partnumber: item2.partnumber});
-//   }
-// });
+data2.forEach((item2) => {
+  const match = data1.find((item1) => item2.partnumber === item1.partnumber);
+  if (!match) {
+    unmatchedPartNumbers.push({partnumber: item2.partnumber});
+  }
+});
 
-// const result = {
-//   unmatchedPartNumbers
-// };
+const result = {
+  unmatchedPartNumbers
+};
 
-// const resultJson = JSON.stringify(result);
+const resultJson = JSON.stringify(result);
 
-// fs.writeFileSync('result.json', resultJson);
+fs.writeFileSync('result.json', resultJson);
 
 
 
 
 //excel b,c ve d kolonlarını alma
 
-const xlsx = require('xlsx');
-const fs = require('fs');
+// const xlsx = require('xlsx');
+// const fs = require('fs');
 
 
-const workbook = xlsx.readFile('mag-2list.xlsx');
+// const workbook = xlsx.readFile('mag-2list.xlsx');
 
 
-const worksheet = workbook.Sheets[workbook.SheetNames[1]];
+// const worksheet = workbook.Sheets[workbook.SheetNames[1]];
 
 
-const jsonData = [];
+// const jsonData = [];
 
 
-for (let i = 2; i <= worksheet['!ref'].split(':')[1].substring(1); i++) {
-  const aCell = worksheet['A' + i];
-//   const bCell = worksheet['B' + i];
-//   const cCell = worksheet['C' + i];
-//   const dCell = worksheet['D' + i];
+// for (let i = 2; i <= worksheet['!ref'].split(':')[1].substring(1); i++) {
+//   const aCell = worksheet['A' + i];
+// //   const bCell = worksheet['B' + i];
+// //   const cCell = worksheet['C' + i];
+// //   const dCell = worksheet['D' + i];
   
 
 
 
-    const obj = {
-    //   oem: bCell.v,
-      partnumber: ""+aCell.v+"",
-    //   eskiPartNumber: dCell.v
-    };
+//     const obj = {
+//     //   oem: bCell.v,
+//       partnumber: ""+aCell.v+"",
+//     //   eskiPartNumber: dCell.v
+//     };
 
-    jsonData.push(obj);
+//     jsonData.push(obj);
   
-}
+// }
 
 
-fs.writeFile('allpartNumber.json', JSON.stringify(jsonData), function (err) {
-  if (err) throw err;
-  console.log('JSON dosyası oluşturuldu!');
-});
+// fs.writeFile('allpartNumber.json', JSON.stringify(jsonData), function (err) {
+//   if (err) throw err;
+//   console.log('JSON dosyası oluşturuldu!');
+// });
 
 
 
@@ -273,7 +273,7 @@ fs.writeFile('allpartNumber.json', JSON.stringify(jsonData), function (err) {
 
 // // İki JSON dosyasını okuyoruz
 // const dosya1 = fs.readFileSync('caterpillar.json');
-// const dosya2 = fs.readFileSync('bulunamayan.json');
+// const dosya2 = fs.readFileSync('bulunamayan-caterpillar.json');
 
 // // JSON verilerini JavaScript nesnelerine dönüştürüyoruz
 // const veri1 = JSON.parse(dosya1);
@@ -285,10 +285,10 @@ fs.writeFile('allpartNumber.json', JSON.stringify(jsonData), function (err) {
 // for (let i = 0; i < veri1.length; i++) {
 //   for (let j = 0; j < veri2.length; j++) {
 //     // partNumber değerlerini karşılaştırıyoruz
-//     if (veri1[i].partNumber === veri2[j].partNumber) {
+//     if (veri1[i].partnumber.toString() === veri2[j].partnumber.toString()) {
 //       // Eşleşen nesnelerin eskiPartNumber değerlerini diziye ekliyoruz
-//       eskiPartNumDizi.push({partnumber:veri1[i].eskiPartNumber});
-//       break; // ikinci dosyada birden fazla aynı partNumber değeri olabilir, bu yüzden ilk eşleşme sonrası döngüden çıkıyoruz
+//       eskiPartNumDizi.push({partnumber:veri1[i].eskipartnumber});
+//       // ikinci dosyada birden fazla aynı partNumber değeri olabilir, bu yüzden ilk eşleşme sonrası döngüden çıkıyoruz
 //     }
 //   }
 // }
@@ -297,7 +297,9 @@ fs.writeFile('allpartNumber.json', JSON.stringify(jsonData), function (err) {
 // const yeniVeri = JSON.stringify(eskiPartNumDizi);
 
 // // Yeni dosyaya yazdırıyoruz
-// fs.writeFileSync('caterpillar-eski.json', yeniVeri);
+// fs.writeFileSync('eskiPartNumber.json', yeniVeri);
+
+
 
 
 
@@ -366,3 +368,25 @@ fs.writeFile('allpartNumber.json', JSON.stringify(jsonData), function (err) {
 
 
 // fs.writeFileSync('hedef3.json', JSON.stringify(newData));
+
+
+
+
+// her elemanı unique yapmak için kullanılacak
+// const fs = require('fs');
+
+// const file = fs.readFileSync('allpartNumber.json');
+
+// const obj = JSON.parse(file);
+
+// const uniqueObj = obj.reduce((acc, curr) => {
+//   const existingItem = acc.find((item) => item.partnumber === curr.partnumber);
+//   if (existingItem) {
+//     existingItem.quantity += curr.quantity;
+//   } else {
+//     acc.push(curr);
+//   }
+//   return acc;
+// }, []);
+
+// fs.writeFileSync('unique7-allNumber.json', JSON.stringify(uniqueObj));
