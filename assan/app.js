@@ -190,37 +190,37 @@
 
 
 //karşılaştırma
-const fs = require('fs');
+// const fs = require('fs');
 
-const file1 = fs.readFileSync('unique7-allNumber.json');
-const file2 = fs.readFileSync('unique6-cat-allNumber.json');
+// const file2 = fs.readFileSync('kalan-urunler.json');
+// const file1 = fs.readFileSync('son-urun.json');
 
-const data1 = JSON.parse(file1);
-const data2 = JSON.parse(file2);
+// const data1 = JSON.parse(file1);
+// const data2 = JSON.parse(file2);
 
-const unmatchedPartNumbers = [];
+// const unmatchedPartNumbers = [];
 
-data1.forEach((item1) => {
-  const match = data2.find((item2) => item1.partnumber === item2.partnumber);
-  if (!match) {
-    unmatchedPartNumbers.push({partnumber: item1.partnumber});
-  }
-});
+// data1.forEach((item1) => {
+//   const match = data2.find((item2) => item1.partnumber === item2.partnumber);
+//   if (!match) {
+//     unmatchedPartNumbers.push({partnumber: item1.partnumber});
+//   }
+// });
 
-data2.forEach((item2) => {
-  const match = data1.find((item1) => item2.partnumber === item1.partnumber);
-  if (!match) {
-    unmatchedPartNumbers.push({partnumber: item2.partnumber});
-  }
-});
+// data2.forEach((item2) => {
+//   const match = data1.find((item1) => item2.partnumber === item1.partnumber);
+//   if (!match) {
+//     unmatchedPartNumbers.push({partnumber: item2.partnumber});
+//   }
+// });
 
-const result = {
-  unmatchedPartNumbers
-};
+// const result = {
+//   unmatchedPartNumbers
+// };
 
-const resultJson = JSON.stringify(result);
+// const resultJson = JSON.stringify(result);
 
-fs.writeFileSync('result.json', resultJson);
+// fs.writeFileSync('result.json', resultJson);
 
 
 
@@ -325,27 +325,27 @@ fs.writeFileSync('result.json', resultJson);
 
 //iki json arasında eşleşmeyen partnumberleri yazdıran kod
 
-// const fs = require('fs');
+const fs = require('fs');
 
 
-// const rawData1 = fs.readFileSync('caterpillar_allpartnumber.json');
-// const data1 = JSON.parse(rawData1);
+const rawData1 = fs.readFileSync('kalan-urunler.json');
+const data1 = JSON.parse(rawData1);
 
 
-// const rawData2 = fs.readFileSync('gokcek-caterpillar.json');
-// const data2 = JSON.parse(rawData2);
+const rawData2 = fs.readFileSync('son-urun.json');
+const data2 = JSON.parse(rawData2);
 
 
-// const newData = [];
-// data1.forEach(item1 => {
-//   const found = data2.some(item2 => item2.partnumber === item1.partnumber);
-//   if (!found) {
-//     newData.push({ partnumber: item1.partnumber });
-//   }
-// });
+const newData = [];
+data1.forEach(item1 => {
+  const found = data2.some(item2 => item2.partnumber === item1.partnumber);
+  if (!found) {
+    newData.push({ partnumber: item1.partnumber });
+  }
+});
 
 
-// fs.writeFileSync('eksik_caterpillar.json', JSON.stringify(newData));
+fs.writeFileSync('result.json', JSON.stringify(newData));
 
 
 

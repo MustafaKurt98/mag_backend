@@ -9,7 +9,7 @@ var kalanparca =[]
 //32360 ürün varmış
 //976 ürün bulamamış
 //süreyi 15 sn cektım 3 gün kaldı on numara teşekkür eder ve gidiy öptüm
-fs.readFile("./gokcek-caterpillar-50-500.json", "utf8", function (err, datas) {
+fs.readFile("./result.json", "utf8", function (err, datas) {
   if (err) {
     console.log(err);
   }
@@ -151,11 +151,11 @@ fs.readFile("./gokcek-caterpillar-50-500.json", "utf8", function (err, datas) {
                   compatibledescription: avsParArr.length > 0 ? avsParArr : null,
                 };
                 console.log(jsonObject)
-                fs.readFile("./data4.json", "utf8", function (err, datas) {
+                fs.readFile("./son-urun2.json", "utf8", function (err, datas) {
                   var obj = JSON.parse(datas);
                   obj.push(jsonObject);
                   jsonStr = JSON.stringify(obj);
-                  fs.writeFile("./data4.json", jsonStr, function (err) {
+                  fs.writeFile("./son-urun2.json", jsonStr, function (err) {
                     if (err) throw err;
                     console.log("Saved!");
                   });
@@ -258,11 +258,11 @@ fs.readFile("./gokcek-caterpillar-50-500.json", "utf8", function (err, datas) {
                   partNumber: keypart.partnumber,
                   compatibledescription:avsParArr
                 };
-                fs.readFile("./data4.json", "utf8", function (err, datas) {
+                fs.readFile("./son-urun2.json", "utf8", function (err, datas) {
                   var obj = JSON.parse(datas);
                   obj.push(jsonObject);
                   jsonStr = JSON.stringify(obj);
-                  fs.writeFile("./data4.json", jsonStr, function (err) {
+                  fs.writeFile("./son-urun2.json", jsonStr, function (err) {
                     if (err) throw err;
                     console.log("Saved!");
                   });
