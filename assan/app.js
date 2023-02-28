@@ -325,27 +325,27 @@
 
 //iki json arasında eşleşmeyen partnumberleri yazdıran kod
 
-const fs = require('fs');
+// const fs = require('fs');
 
 
-const rawData1 = fs.readFileSync('kalan-urunler.json');
-const data1 = JSON.parse(rawData1);
+// const rawData1 = fs.readFileSync('kalan-urunler.json');
+// const data1 = JSON.parse(rawData1);
 
 
-const rawData2 = fs.readFileSync('son-urun.json');
-const data2 = JSON.parse(rawData2);
+// const rawData2 = fs.readFileSync('son-urun.json');
+// const data2 = JSON.parse(rawData2);
 
 
-const newData = [];
-data1.forEach(item1 => {
-  const found = data2.some(item2 => item2.partnumber === item1.partnumber);
-  if (!found) {
-    newData.push({ partnumber: item1.partnumber });
-  }
-});
+// const newData = [];
+// data1.forEach(item1 => {
+//   const found = data2.some(item2 => item2.partnumber === item1.partnumber);
+//   if (!found) {
+//     newData.push({ partnumber: item1.partnumber });
+//   }
+// });
 
 
-fs.writeFileSync('result.json', JSON.stringify(newData));
+// fs.writeFileSync('result.json', JSON.stringify(newData));
 
 
 
@@ -373,20 +373,20 @@ fs.writeFileSync('result.json', JSON.stringify(newData));
 
 
 // her elemanı unique yapmak için kullanılacak
-// const fs = require('fs');
+const fs = require('fs');
 
-// const file = fs.readFileSync('allpartNumber.json');
+const file = fs.readFileSync('new.json');
 
-// const obj = JSON.parse(file);
+const obj = JSON.parse(file);
 
-// const uniqueObj = obj.reduce((acc, curr) => {
-//   const existingItem = acc.find((item) => item.partnumber === curr.partnumber);
-//   if (existingItem) {
-//     existingItem.quantity += curr.quantity;
-//   } else {
-//     acc.push(curr);
-//   }
-//   return acc;
-// }, []);
+const uniqueObj = obj.reduce((acc, curr) => {
+  const existingItem = acc.find((item) => item.partnumber === curr.partnumber);
+  if (existingItem) {
+    existingItem.quantity += curr.quantity;
+  } else {
+    acc.push(curr);
+  }
+  return acc;
+}, []);
 
-// fs.writeFileSync('unique7-allNumber.json', JSON.stringify(uniqueObj));
+fs.writeFileSync('unique-new.json', JSON.stringify(uniqueObj));

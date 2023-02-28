@@ -50,6 +50,7 @@ const MagpaginationProductAPI = async (req, res) => {
     try {
         results.results = await MagProductModel.find().limit(limit * 1).skip(startIndex).exec();
         res.status(200).json(results);
+        
     } catch (e) {
         res.status(500).json({ message: e.message });
     }
