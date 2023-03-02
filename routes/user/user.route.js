@@ -13,6 +13,7 @@ const guestSignIn = require('../../controller/guest/guest_user');
 
 router.post('/signup', signUp.signUp);
 router.post('/signin', signIn.signIn);
+router.post('/forgotpassword', signIn.forgotPassword);
 router.post('/checktoken', checkToken.checkToken);
 router.post('/updateUserName', updateUser.updateUser);
 router.post('/updateEmail', updateEmail.updateEmail);

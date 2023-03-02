@@ -25,6 +25,7 @@
     "mongodb": "^4.13.0",
     "mongoose": "^6.8.1",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.1",
     "path": "^0.12.7",
     "puppeteer": "^19.7.2",
     "vcard-creator": "^0.6.0",
