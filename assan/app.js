@@ -170,16 +170,16 @@
 // obje bolucu
 // const fs = require('fs');
 
-// fs.readFile('gokcek-caterpillar.json', 'utf8', (err, data) => {
+// fs.readFile('ilk1500-2126.json', 'utf8', (err, data) => {
 //   if (err) throw err;
 
 //   const objeler = JSON.parse(data);
 
-//   const ilk_1000_obje = objeler.slice(1000, 1901);
+//   const ilk_1000_obje = objeler.slice(500, 627);
 
 //   const yeni_dosya = JSON.stringify(ilk_1000_obje);
 
-//   fs.writeFile('gokcek-caterpillar-kalan901.json', yeni_dosya, (err) => {
+//   fs.writeFile('kalan-127.json', yeni_dosya, (err) => {
 //     if (err) throw err;
 //     console.log('Yeni dosya oluşturuldu!');
 //   });
@@ -245,7 +245,7 @@
 // //   const bCell = worksheet['B' + i];
 // //   const cCell = worksheet['C' + i];
 // //   const dCell = worksheet['D' + i];
-  
+
 
 
 
@@ -256,7 +256,7 @@
 //     };
 
 //     jsonData.push(obj);
-  
+
 // }
 
 
@@ -325,27 +325,27 @@
 
 //iki json arasında eşleşmeyen partnumberleri yazdıran kod
 
-// const fs = require('fs');
+const fs = require('fs');
 
 
-// const rawData1 = fs.readFileSync('kalan-urunler.json');
-// const data1 = JSON.parse(rawData1);
+const rawData1 = fs.readFileSync('unique9-bulunamayanlar.json');
+const data1 = JSON.parse(rawData1);
 
 
-// const rawData2 = fs.readFileSync('son-urun.json');
-// const data2 = JSON.parse(rawData2);
+const rawData2 = fs.readFileSync('yeni-json.json');
+const data2 = JSON.parse(rawData2);
 
 
-// const newData = [];
-// data1.forEach(item1 => {
-//   const found = data2.some(item2 => item2.partnumber === item1.partnumber);
-//   if (!found) {
-//     newData.push({ partnumber: item1.partnumber });
-//   }
-// });
+const newData = [];
+data1.forEach(item1 => {
+  const found = data2.some(item2 => item2.partnumber === item1.partnumber);
+  if (!found) {
+    newData.push({ partnumber: item1.partnumber });
+  }
+});
 
 
-// fs.writeFileSync('result.json', JSON.stringify(newData));
+fs.writeFileSync('yeniden-bakilacak.json', JSON.stringify(newData));
 
 
 
@@ -373,20 +373,20 @@
 
 
 // her elemanı unique yapmak için kullanılacak
-const fs = require('fs');
+// const fs = require('fs');
 
-const file = fs.readFileSync('new.json');
+// const file = fs.readFileSync('./magstore/eski-yeni-toplam.json');
 
-const obj = JSON.parse(file);
+// const obj = JSON.parse(file);
 
-const uniqueObj = obj.reduce((acc, curr) => {
-  const existingItem = acc.find((item) => item.partnumber === curr.partnumber);
-  if (existingItem) {
-    existingItem.quantity += curr.quantity;
-  } else {
-    acc.push(curr);
-  }
-  return acc;
-}, []);
+// const uniqueObj = obj.reduce((acc, curr) => {
+//   const existingItem = acc.find((item) => item.partnumber === curr.partnumber);
+//   if (existingItem) {
+//     existingItem.quantity += curr.quantity;
+//   } else {
+//     acc.push(curr);
+//   }
+//   return acc;
+// }, []);
 
-fs.writeFileSync('unique-new.json', JSON.stringify(uniqueObj));
+// fs.writeFileSync('./magstore/unique-eski-yeni.json', JSON.stringify(uniqueObj));

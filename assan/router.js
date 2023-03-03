@@ -3,13 +3,13 @@ const fs = require("fs");
 const cheerio = require('cheerio');
 
 const found = undefined;
-var kalanparca =[]
+var kalanparca = []
 //18878 ürün kalmış
 //12506 ürün bulmuş
 //32360 ürün varmış
 //976 ürün bulamamış
 //süreyi 15 sn cektım 3 gün kaldı on numara teşekkür eder ve gidiy öptüm
-fs.readFile("./result.json", "utf8", function (err, datas) {
+fs.readFile("./kalan-127.json", "utf8", function (err, datas) {
   if (err) {
     console.log(err);
   }
@@ -21,7 +21,7 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
       setTimeout(() => {
         (async () => {
           try {
-            const browser =await  puppeteer.launch({
+            const browser = await puppeteer.launch({
               headless: false,
               slowMo: 100,
             });
@@ -44,7 +44,7 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
 
             let element = await page.$(".res_row a");
             if (element == null) {
-              console.log("---"+keypart.partnumber+"---")
+              console.log("---" + keypart.partnumber + "---")
               kalanparca.push(keypart.partnumber)
               await page.close();
               await browser.close();
@@ -76,18 +76,18 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
 
                 let value2 = await page.$$eval(
                   ".col-12.col-lg-11.mb-4 .mt-4.mb-3",
-                  (tds) =>{
-                        // return td.innerHTML
-                        var arr=[]
-                   
-                        for(var ij=1;ij<tds[0].innerText.split("\n").length-1;ij++){
-                          arr.push(tds[0].innerText.split("\n")[ij])
-                        }
+                  (tds) => {
+                    // return td.innerHTML
+                    var arr = []
 
-                        return arr 
-                      }
+                    for (var ij = 1; ij < tds[0].innerText.split("\n").length - 1; ij++) {
+                      arr.push(tds[0].innerText.split("\n")[ij])
+                    }
+
+                    return arr
+                  }
                 );
-                      console.log(value2)
+                console.log(value2)
                 let value3 = await page.$$eval(
                   ".col-12.col-lg-11.mb-4 .bold1",
                   (tds) =>
@@ -95,7 +95,7 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
                       return td.innerText;
                     })
                 );
-                    console.log(value3)
+                console.log(value3)
                 let value4 = await page.$$eval(
                   ".col-12.col-lg-11.mb-4 .block_solid",
                   (tds) =>
@@ -103,44 +103,44 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
                       return td.innerText;
                     })
                 );
-                var avsParArr=[]
+                var avsParArr = []
 
                 let elementBaslik = await page.$(".col-12.col-lg-11.mb-4 .card-body .div_show_more");
-                  if(elementBaslik){
-                let baslik1 = await page.$$eval(
-                  ".col-12.col-lg-11.mb-4 .card-body .div_show_more",
-                  (tds) =>{
-                        // return td.innerHTML
-                        var arr=[]
-                       let dss =  tds[0].innerHTML.split("<br>").map((key23,index23)=>{
-                          arr.push(key23)
-                        })
-                        return arr 
-                      }
-                );
-
-                      if(baslik1.length>0){
-                      baslik1.map((keyParca)=>{
-                        const $1 = cheerio.load( keyParca);
-
-                        // Etiketler arasındaki metni çekin
-                        const textBaslik = $1('b').text();
-                        const textMakineAdi = $1('a');
-                       var elementsArray=[];
-                       textMakineAdi.each((i, element33) => {
-                         elementsArray.push($1(element33).text());  // Diziye etiketlerin içeriklerini ekleyin
-                       });
-                        const objPart ={
-                          parca: textBaslik.trim(),
-                          list: elementsArray
-                        }
-                        avsParArr.push(objPart)
-                        
+                if (elementBaslik) {
+                  let baslik1 = await page.$$eval(
+                    ".col-12.col-lg-11.mb-4 .card-body .div_show_more",
+                    (tds) => {
+                      // return td.innerHTML
+                      var arr = []
+                      let dss = tds[0].innerHTML.split("<br>").map((key23, index23) => {
+                        arr.push(key23)
                       })
-           
+                      return arr
                     }
+                  );
+
+                  if (baslik1.length > 0) {
+                    baslik1.map((keyParca) => {
+                      const $1 = cheerio.load(keyParca);
+
+                      // Etiketler arasındaki metni çekin
+                      const textBaslik = $1('b').text();
+                      const textMakineAdi = $1('a');
+                      var elementsArray = [];
+                      textMakineAdi.each((i, element33) => {
+                        elementsArray.push($1(element33).text());  // Diziye etiketlerin içeriklerini ekleyin
+                      });
+                      const objPart = {
+                        parca: textBaslik.trim(),
+                        list: elementsArray
+                      }
+                      avsParArr.push(objPart)
+
+                    })
 
                   }
+
+                }
 
                 const jsonObject = {
                   name: value[0].trim(),
@@ -151,11 +151,11 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
                   compatibledescription: avsParArr.length > 0 ? avsParArr : null,
                 };
                 console.log(jsonObject)
-                fs.readFile("./son-urun2.json", "utf8", function (err, datas) {
+                fs.readFile("./data11.json", "utf8", function (err, datas) {
                   var obj = JSON.parse(datas);
                   obj.push(jsonObject);
                   jsonStr = JSON.stringify(obj);
-                  fs.writeFile("./son-urun2.json", jsonStr, function (err) {
+                  fs.writeFile("./data11.json", jsonStr, function (err) {
                     if (err) throw err;
                     console.log("Saved!");
                   });
@@ -174,16 +174,16 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
                 );
                 let value2 = await page.$$eval(
                   ".col-md-9.col-lg-8.mb-4 .mt-4.mb-3",
-                  (tds) =>{
-                        // return td.innerHTML
-                        var arr=[]
-                   
-                        for(var ij=1;ij<tds[0].innerText.split("\n").length-1;ij++){
-                          arr.push(tds[0].innerText.split("\n")[ij])
-                        }
+                  (tds) => {
+                    // return td.innerHTML
+                    var arr = []
 
-                        return arr 
-                      }
+                    for (var ij = 1; ij < tds[0].innerText.split("\n").length - 1; ij++) {
+                      arr.push(tds[0].innerText.split("\n")[ij])
+                    }
+
+                    return arr
+                  }
                 );
                 let value3 = await page.$$eval(
                   ".col-md-9.col-lg-8.mb-4 .bold1",
@@ -212,43 +212,43 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
                 // });
                 let baslik142 = await page.$(
                   ".col-md-9.col-lg-8.mb-4 .card.mb-4 .card-body .div_show_more b"
-                  
+
                 );
                 // console.log(baslik142)
 
                 let baslik1 = await page.$$eval(
                   ".col-md-9.col-lg-8.mb-4 .card.mb-4 .card-body .div_show_more",
-                  (tds) =>{
-                        // return td.innerHTML
-                        var arr=[]
-                       let dss =  tds[0].innerHTML.split("<br>").map((key23,index23)=>{
-                          arr.push(key23)
-                        })
-                        return arr 
-                      }
+                  (tds) => {
+                    // return td.innerHTML
+                    var arr = []
+                    let dss = tds[0].innerHTML.split("<br>").map((key23, index23) => {
+                      arr.push(key23)
+                    })
+                    return arr
+                  }
                 );
-                      var avsParArr=[]
-                      baslik1.map((keyParca)=>{
-                        const $1 = cheerio.load( keyParca);
+                var avsParArr = []
+                baslik1.map((keyParca) => {
+                  const $1 = cheerio.load(keyParca);
 
-                        // Etiketler arasındaki metni çekin
-                        const textBaslik = $1('b').text();
-                        const textMakineAdi = $1('a');
-                       var elementsArray=[];
-                       textMakineAdi.each((i, element33) => {
-                         elementsArray.push($1(element33).text());  // Diziye etiketlerin içeriklerini ekleyin
-                       });
-                        const objPart ={
-                          parca: textBaslik,
-                          list: elementsArray
-                        }
-                        avsParArr.push(objPart)
-                        
-                      })
-           
-                  
+                  // Etiketler arasındaki metni çekin
+                  const textBaslik = $1('b').text();
+                  const textMakineAdi = $1('a');
+                  var elementsArray = [];
+                  textMakineAdi.each((i, element33) => {
+                    elementsArray.push($1(element33).text());  // Diziye etiketlerin içeriklerini ekleyin
+                  });
+                  const objPart = {
+                    parca: textBaslik,
+                    list: elementsArray
+                  }
+                  avsParArr.push(objPart)
 
-          
+                })
+
+
+
+
 
                 const jsonObject = {
                   name: value[0],
@@ -256,13 +256,13 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
                   netweight: value3.length > 0 ? value3[0] : null,
                   relatedPart: value4.length > 0 ? value4[0] : null,
                   partNumber: keypart.partnumber,
-                  compatibledescription:avsParArr
+                  compatibledescription: avsParArr
                 };
-                fs.readFile("./son-urun2.json", "utf8", function (err, datas) {
+                fs.readFile("./data11.json", "utf8", function (err, datas) {
                   var obj = JSON.parse(datas);
                   obj.push(jsonObject);
                   jsonStr = JSON.stringify(obj);
-                  fs.writeFile("./son-urun2.json", jsonStr, function (err) {
+                  fs.writeFile("./data11.json", jsonStr, function (err) {
                     if (err) throw err;
                     console.log("Saved!");
                   });
@@ -277,7 +277,7 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
         })();
       }, 13000 * index);
     });
-    fs.writeFile('bulunamayan.json',JSON.stringify(kalanparca),(erk,resk)=>{
+    fs.writeFile('bulunamayan.json', JSON.stringify(kalanparca), (erk, resk) => {
       console.log(erk)
     })
   } else {
@@ -287,5 +287,5 @@ fs.readFile("./result.json", "utf8", function (err, datas) {
 
 const express = require("express");
 const DutyRouter = express.Router();
-DutyRouter.post("/dutyAll", () => {});
+DutyRouter.post("/dutyAll", () => { });
 module.exports = DutyRouter;
