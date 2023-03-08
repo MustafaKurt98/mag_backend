@@ -1,29 +1,39 @@
-// const fs = require('fs');
-
-// // Dosya okuma işlemi
-// const data = fs.readFileSync('unique5-mag_guncel.json');
-// const jsonData = JSON.parse(data);
-
-// // Yeni bir dizi oluşturmak için filter() yöntemini kullanın
-// const partnumbers = jsonData.filter(item => Array.isArray(item.image) && item.image.length === 0)
-//     .map(item => ({ partnumber: item.partnumber }));
-
-// // Yeni dosyaya yazdırma işlemi
-// const newData = JSON.stringify(partnumbers);
-// fs.writeFileSync('photo-done.json', newData);
-
+const json2csv = require('json2csv').Parser;
 const fs = require('fs');
 
-// Dosya okuma işlemi
-const data = fs.readFileSync('./magstore/toplam-bulunan.json');
+// JSON dosyasını yükle
+const jsonData = require('./magstore/unique-eski-yeni.json');
 
-// JSON veri yapısına dönüştürme işlemi
-const objeler = JSON.parse(data);
+// const ff = jsonData.map(item => {
+//    if (item.compatibledescription != null) {
+//       item.compatibledescription.map(item2 => {
+//          if (item2.list != null) {
+//             item2.list.map(item3 => {
+//                console.log(item3);
+//             })
+//          }
+//       })
+//    }
+// })
 
-// Tüm objeler için "image" özelliği ekleme işlemi
-for (let i = 0; i < objeler.length; i++) {
-   objeler[i].image = [];
-}
+// JSON verilerini düzleştir
+const flattenedData = jsonData.map(item => {
+   return {
+      "name": item.name ?? null,
+      "code": item.code.map(item2 => { return item2 }),
+      "netweight": item.netweight ?? null,
+      "relatedPart": item.relatedPart ?? null,
+      "partnumber": item.partnumber ?? null,
+      "compatibledescription-parca": item.compatibledescription != null ? item.compatibledescription.map(item2 => item2.parca) : null,
+      "compatibledescription-list": item.compatibledescription != null ? item.compatibledescription.map(item2 => item2.list != null ? item2.list.map(item3 => {return item2.parca +':'+ item3 }) : null) : null,
+      "image": item.image!=null ? item.image.map(item2 => item2) : null,
+   }
+});
 
-// Dosyaya yazma işlemi
-fs.writeFileSync('./magstoretoplam-bulunan-son.json', JSON.stringify(objeler));
+// CSV formatına dönüştür
+const fields = ['name', 'code', 'netweight', 'relatedPart', 'partnumber', 'compatibledescription-parca', 'compatibledescription-list', 'image'];
+const csvParser = new json2csv({ fields });
+const csvData = csvParser.parse(flattenedData);
+
+// CSV dosyasını kaydet
+fs.writeFileSync('veriler3.csv', csvData);

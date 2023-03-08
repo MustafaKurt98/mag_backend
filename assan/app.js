@@ -142,7 +142,7 @@
 //     if (cellB.v === "CATERPILLAR") {
 
 
-//         const cellC = worksheet['D' + rowIndex];
+//         const cellC = worksheet['C' + rowIndex];
 
 //         if (cellC) {
 
@@ -307,14 +307,16 @@
 // const fs = require('fs');
 
 
-// const rawData = fs.readFileSync('caterpillar.json');
+// const rawData = fs.readFileSync('./magstore/unique-eski-yeni3.json');
 // const data = JSON.parse(rawData);
+// const arr = [];
 
+// const newData = data.map(item => {
+//   arr.push({ partnumber: item.partnumber });
 
-// const newData = data.map(item => ({ partnumber:""+ item.partnumber+"" }));
+// });
 
-
-// fs.writeFileSync('caterpilla_allpartnumber.json', JSON.stringify(newData));
+// fs.writeFileSync('unique44.json', JSON.stringify(arr));
 
 
 
@@ -325,27 +327,27 @@
 
 //iki json arasında eşleşmeyen partnumberleri yazdıran kod
 
-const fs = require('fs');
+// const fs = require('fs');
 
 
-const rawData1 = fs.readFileSync('unique9-bulunamayanlar.json');
-const data1 = JSON.parse(rawData1);
+// const rawData1 = fs.readFileSync('unique9-bulunamayanlar.json');
+// const data1 = JSON.parse(rawData1);
 
 
-const rawData2 = fs.readFileSync('yeni-json.json');
-const data2 = JSON.parse(rawData2);
+// const rawData2 = fs.readFileSync('yeni-json.json');
+// const data2 = JSON.parse(rawData2);
 
 
-const newData = [];
-data1.forEach(item1 => {
-  const found = data2.some(item2 => item2.partnumber === item1.partnumber);
-  if (!found) {
-    newData.push({ partnumber: item1.partnumber });
-  }
-});
+// const newData = [];
+// data1.forEach(item1 => {
+//   const found = data2.some(item2 => item2.partnumber === item1.partnumber);
+//   if (!found) {
+//     newData.push({ partnumber: item1.partnumber });
+//   }
+// });
 
 
-fs.writeFileSync('yeniden-bakilacak.json', JSON.stringify(newData));
+// fs.writeFileSync('yeniden-bakilacak.json', JSON.stringify(newData));
 
 
 
@@ -375,7 +377,7 @@ fs.writeFileSync('yeniden-bakilacak.json', JSON.stringify(newData));
 // her elemanı unique yapmak için kullanılacak
 // const fs = require('fs');
 
-// const file = fs.readFileSync('./magstore/eski-yeni-toplam.json');
+// const file = fs.readFileSync('./magstore/unique-eski-yeni.json');
 
 // const obj = JSON.parse(file);
 
@@ -389,4 +391,19 @@ fs.writeFileSync('yeniden-bakilacak.json', JSON.stringify(newData));
 //   return acc;
 // }, []);
 
-// fs.writeFileSync('./magstore/unique-eski-yeni.json', JSON.stringify(uniqueObj));
+// fs.writeFileSync('./magstore/unique-eski-yeni2.json', JSON.stringify(uniqueObj));
+
+
+// const fs = require('fs');
+
+// const file = fs.readFileSync('./magstore/unique-eski-yeni.json');
+
+// const obj = JSON.parse(file);
+
+// const emptyParca = obj.filter(item => item.compatibledescription!=null ?  item.compatibledescription[0].parca==="":null);
+
+// var list=[];
+// list.push(emptyParca);
+
+
+// fs.writeFileSync('./magstore/unique-eski-yeni3.json', JSON.stringify(list));
