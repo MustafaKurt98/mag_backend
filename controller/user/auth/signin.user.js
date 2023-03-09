@@ -65,7 +65,7 @@ const forgotPassword = async (req,res) => {
             if (error) {
               console.log(error);
             } else {
-              return res.status(200).json({ msg: 'Mail gönderildi', code: code });
+              return res.status(200).json({ msg: 'Mail gönderildi', code: code ,});
             }
           });
     }

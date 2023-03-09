@@ -9,7 +9,7 @@ var kalanparca = []
 //32360 ürün varmış
 //976 ürün bulamamış
 //süreyi 15 sn cektım 3 gün kaldı on numara teşekkür eder ve gidiy öptüm
-fs.readFile("./kalan-127.json", "utf8", function (err, datas) {
+fs.readFile("./aaa.json", "utf8", function (err, datas) {
   if (err) {
     console.log(err);
   }
@@ -124,7 +124,7 @@ fs.readFile("./kalan-127.json", "utf8", function (err, datas) {
                       const $1 = cheerio.load(keyParca);
 
                       // Etiketler arasındaki metni çekin
-                      const textBaslik = $1('b').text();
+                      const textBaslik = $1('span').text();
                       const textMakineAdi = $1('a');
                       var elementsArray = [];
                       textMakineAdi.each((i, element33) => {
@@ -151,11 +151,11 @@ fs.readFile("./kalan-127.json", "utf8", function (err, datas) {
                   compatibledescription: avsParArr.length > 0 ? avsParArr : null,
                 };
                 console.log(jsonObject)
-                fs.readFile("./data11.json", "utf8", function (err, datas) {
+                fs.readFile("./aaa2.json", "utf8", function (err, datas) {
                   var obj = JSON.parse(datas);
                   obj.push(jsonObject);
                   jsonStr = JSON.stringify(obj);
-                  fs.writeFile("./data11.json", jsonStr, function (err) {
+                  fs.writeFile("./aaa2.json", jsonStr, function (err) {
                     if (err) throw err;
                     console.log("Saved!");
                   });
@@ -232,7 +232,7 @@ fs.readFile("./kalan-127.json", "utf8", function (err, datas) {
                   const $1 = cheerio.load(keyParca);
 
                   // Etiketler arasındaki metni çekin
-                  const textBaslik = $1('b').text();
+                  const textBaslik = $1('span').text();
                   const textMakineAdi = $1('a');
                   var elementsArray = [];
                   textMakineAdi.each((i, element33) => {
@@ -258,11 +258,11 @@ fs.readFile("./kalan-127.json", "utf8", function (err, datas) {
                   partNumber: keypart.partnumber,
                   compatibledescription: avsParArr
                 };
-                fs.readFile("./data11.json", "utf8", function (err, datas) {
+                fs.readFile("./aaa2.json", "utf8", function (err, datas) {
                   var obj = JSON.parse(datas);
                   obj.push(jsonObject);
                   jsonStr = JSON.stringify(obj);
-                  fs.writeFile("./data11.json", jsonStr, function (err) {
+                  fs.writeFile("./aaa2.json", jsonStr, function (err) {
                     if (err) throw err;
                     console.log("Saved!");
                   });
