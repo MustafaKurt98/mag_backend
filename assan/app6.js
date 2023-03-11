@@ -1,17 +1,17 @@
-// obje bolucu
 const fs = require('fs');
 
-fs.readFile('ilk1500-2126.json', 'utf8', (err, data) => {
-  if (err) throw err;
+const file = fs.readFileSync('./magstore/unique-eski-yeni.json');
 
-  const objeler = JSON.parse(data);
+const obj = JSON.parse(file);
 
-  const ilk_1000_obje = objeler.slice(500, 627);
+const uniqueObj = obj.reduce((acc, curr) => {
+  const existingItem = acc.find((item) => item.partnumber === curr.partnumber);
+  if (existingItem) {
+    existingItem.quantity += curr.quantity;
+  } else {
+    acc.push(curr);
+  }
+  return acc;
+}, []);
 
-  const yeni_dosya = JSON.stringify(ilk_1000_obje);
-
-  fs.writeFile('kalan-127.json', yeni_dosya, (err) => {
-    if (err) throw err;
-    console.log('Yeni dosya oluşturuldu!');
-  });
-});
+fs.writeFileSync('./magstore/unique-eski-yeni2.json', JSON.stringify(uniqueObj));

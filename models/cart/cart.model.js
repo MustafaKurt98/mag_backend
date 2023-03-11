@@ -9,4 +9,4 @@ const cartModelSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Cart', cartModelSchema);
+module.exports = mongoose.model('Order', cartModelSchema);

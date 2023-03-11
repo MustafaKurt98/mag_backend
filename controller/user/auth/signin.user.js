@@ -26,7 +26,8 @@ const signIn = async (req, res) => {
                             userID: user._id,
                             token: token,
                             nameSurname: user.nameSurname,
-                            phoneNumber: user.phoneNumber
+                            phoneNumber: user.phoneNumber,
+                            address: user.address,
                         });
                     } else {
                         res.status(400).json({ msg: 'Hatalı şifre' });
