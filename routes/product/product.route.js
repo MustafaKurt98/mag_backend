@@ -8,6 +8,8 @@ router.post('/create', productCreate.magProductCreate);
 
 router.post('/read', productRead.MagpaginationProductAPI);
 
+router.get('/readAll', productRead.getAllMagProductsLength);
+
 router.post('/readASP', productRead.paginationProductAPI);
 
 router.post('/search', searchProduct.searchProductAPI);

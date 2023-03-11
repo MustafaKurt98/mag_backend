@@ -56,4 +56,13 @@ const MagpaginationProductAPI = async (req, res) => {
     }
 }
 
-module.exports = { paginationProductAPI, MagpaginationProductAPI };
+const getAllMagProductsLength = async (req, res) => {
+    try {
+        const products = await MagProductModel.find();
+        res.status(200).json(products.length);
+    } catch (e) {
+        res.status(500).json({ message: e.message });
+    }
+}
+
+module.exports = { paginationProductAPI, MagpaginationProductAPI, getAllMagProductsLength };
